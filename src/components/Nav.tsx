@@ -1,16 +1,26 @@
 import React from "react";
+import Image from "next/image";
 
 type Props = {};
 
 export default function Nav({}: Props) {
   return (
     <header>
+      <Image src="/cp1.png" alt="" priority width="50" height="50" />
       <nav>
-        <ul>
-          <li>Lugar y Fecha</li>
-          <li>Hospedaje</li>
-          <li>Regalos</li>
-          <li>RSVP</li>
+        <ul role="list" className="nav-items">
+          <li>
+            <a href="#location">Lugar y Fecha</a>
+          </li>
+          <li>
+            <a href="#hosting">Hospedaje</a>
+          </li>
+          <li>
+            <a href="#registry">Regalos</a>
+          </li>
+          <li>
+            <a href="#rsvp">RSVP</a>
+          </li>
         </ul>
       </nav>
     </header>

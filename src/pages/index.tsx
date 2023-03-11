@@ -1,8 +1,12 @@
+import Countdown from "@/components/Countdown";
 import HostingCard from "@/components/HostingCard";
 import LocationCard from "@/components/LocationCard";
+import Nav from "@/components/Nav";
 import { THostingCard } from "@/types/types";
 import Head from "next/head";
 import Image from "next/image";
+
+const DATE_OF_EVENT = new Date("Sep 9, 2023, 15:00");
 
 const scheduleData = [
   { time: "2:00pm", event: "Misa" },
@@ -47,21 +51,30 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Nav />
       <main>
         <section className="hero">
+          <div className="hero-overlay"></div>
           <div className="hero-image"></div>
           <div className="hero-content">
-            <Image src="/cp-05.png" alt="" width="450" height="225" />
+            <Image
+              className="site-title"
+              src="/cp-04.png"
+              alt=""
+              width="450"
+              height="225"
+              loading="eager"
+              priority
+            />
             <h2 className="subtitle">Save the Date</h2>
             <h3 className="date">09.09.23</h3>
-            {/* TODO: Counter */}
-            <h3 className="countdown"> 6 meses, 2 dias, 3 horas</h3>
+            <Countdown dateOfEvent={DATE_OF_EVENT} />
             <a href="#rsvp">
               <button className="btn btn-main">RSVP</button>
             </a>
           </div>
         </section>
-        <section className="location">
+        <section className="location" id="location">
           <h2>Lugar</h2>
           <article>
             <h3>Jardín Ixaya</h3>

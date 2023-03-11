@@ -1,18 +1,22 @@
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400&display=swap');
 /*----- VARIABLES -----*/
 :root {
-  --green: 8, 45, 3;
+  --green-100: 83, 99, 84;
+  --green-200: 88, 99, 85;
   --black: 0, 0, 0;
   --white: 217, 217, 217;
 }
 
 /*----- FONT FACE -----*/
 @font-face {
-  font-family: 'New York';
-  src: local('@/static/fonts/NewYork.otf');
+  font-family: 'NewYork';
+  src: local('@/static/fonts/NewYork.otf')
+  format('opentype')
 }
 @font-face {
   font-family: 'Montserrat';
-  src: local('@/static/fonts/Montserrat.ttf');
+  src: local('../static/fonts/Montserrat.ttf')
+  format('truetype');
 }
 
 /* ----- RESET ----- */
@@ -95,6 +99,8 @@ select {
 
 body {
   font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
   font-size: 16px;
   overflow-x: hidden ;
 }
@@ -105,8 +111,45 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'New York', serif;
+  font-weight: 200;
 }
+
+/* ----- HEADER & NAV ----- */
+
+header {
+  width: 100vw;
+  height: 80px;
+  position: fixed;
+  background-color: rgba(0,0,0, 0.3);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 2rem;
+  align-items: center;
+}
+
+
+
+
+.nav-items {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  height: 100%;
+  color: rgba(255,255,255, 0.7);
+}
+
+.nav-items > li > a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 200ms ease;
+}
+.nav-items > li > a:hover {
+  color:rgba(255, 255, 255, 1)
+}
+
+/* ----- HERO SECTION ----- */
 
 .hero {
   width: 100vw;
@@ -117,37 +160,55 @@ h6 {
   align-items: flex-end;
   justify-content: center;
 }
+.hero-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 2;
+  background-color: rgba(0,0,0,0.4);
+}
+
 .hero-content {
   padding-right: 5rem;
   text-align: center;
+  padding-bottom: 5rem;
+  z-index: 10;
+  color: white;
 }
 .site-title {
-  font-size: 64px;
+  mix-blend-mode: multiply;
+  margin-inline: auto;
 }
 .subtitle,
 .date {
   font-size: 48px;
 }
 
-.countdown {
-  font-size: 40px;
+.countdown-container {
+  font-size: 20px;
+  width: 36rem;
+  margin-bottom: 5rem;
 }
 
 .btn {
   outline: none;
-  font-family: 'New York', serif;
+  border: none;
+  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 100;
   cursor: pointer;
   transition: 300ms all ease;
 }
-.btn:hover {
-  backdrop-filter: blur(10px);
+.btn-main:hover {
+  background-color: rgba(var(--green-100), 0.8);
 }
 
 .btn-main {
   width: 248px;
   height: 100px;
   font-size: 36px;
-  background-color: rgba(var(--green), 0.5);
+  background-color: rgba(var(--green-100), 1);
   color: white;
   backdrop-filter: blur(5px);
 }
@@ -155,6 +216,7 @@ h6 {
 .hero-image {
   position: absolute;
   background-image: url('../static/images/hero-image-caro-y-paco.png');
+  filter: brightness(0.8);
   background-size: cover;
   background-position: center left;
   width: 100vw;
