@@ -187,7 +187,7 @@ header {
 
 .hero-image {
   position: absolute;
-  background-image: url("../static/images/hero-image-caro-y-paco.png");
+  background-image: url("/hero-image-caro-y-paco.png");
   filter: brightness(0.8);
   background-size: cover;
   background-position: center left;
