@@ -587,4 +587,7 @@ html {
     justify-content: flex-start;
     gap: 10px;
   }
+  .copy-alert {
+    bottom: 60px;
+  }
 }
