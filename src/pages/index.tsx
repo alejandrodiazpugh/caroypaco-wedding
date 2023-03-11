@@ -5,6 +5,11 @@ import Nav from "@/components/Nav";
 import { THostingCard } from "@/types/types";
 import Head from "next/head";
 import Image from "next/image";
+import { HiLocationMarker } from "react-icons/hi";
+import { BsTelephoneFill } from "react-icons/bs";
+import { AiOutlineLink } from "react-icons/ai";
+import { FaWhatsapp } from "react-icons/fa";
+import DepositCard from "@/components/DepositCard";
 
 const DATE_OF_EVENT = new Date("Sep 9, 2023, 15:00");
 
@@ -16,30 +21,38 @@ const scheduleData = [
 const hotelData: THostingCard[] = [
   {
     title: "Hotel Huayacán Curamoría",
-    description: "Mencionar en registro: Boda Carolina y Paco 9 de septiembre",
+    description:
+      "Marcar directo, mencionando que se hospedan para la boda de Carolina y Paco 09 de septiembre, o por whatsapp con el códico G1NL0G",
     contactInfo: [
-      { name: "443 310 8137", icon: "phone" },
-      { name: "443 137 8738", icon: "whatsapp" },
+      { name: "443 310 8137", type: "phone", icon: <BsTelephoneFill /> },
+      { name: "443 137 8738", type: "whatsapp", icon: <FaWhatsapp /> },
     ],
-    imageSrc: "",
-    imageAlt: "",
+    imageSrc: "/hotel-huayacan.png",
+    imageAlt: "Hotel Huayacan",
   },
   {
     title: "Hotel Hostería Las Quintas",
-    description: "Código de Registro: BCYF09",
+    description: "Utilizar código de registro: BCYF09",
     contactInfo: [
-      { name: "777 318 3949", icon: "phone" },
-      { name: "hosterialasquintas.com.mx", icon: "link" },
+      { name: "777 318 3949", type: "phone", icon: <BsTelephoneFill /> },
+      {
+        name: "hosterialasquintas.com.mx",
+        type: "link",
+        icon: <AiOutlineLink />,
+      },
     ],
-    imageSrc: "",
-    imageAlt: "",
+    imageSrc: "/las-quintas.png",
+    imageAlt: "Hotel Hostería Las Quintas",
   },
   {
-    title: "Camino Real Sumiya",
-    description: "Código de Registro: xxx39er28rg",
-    contactInfo: [{ name: "555 227 7200", icon: "phone" }],
-    imageSrc: "",
-    imageAlt: "",
+    title: "Hotel Sumiya",
+    description:
+      "Marcar directo, mencionando que se hospedan para la boda de Carolina y Paco 09 de septiembre",
+    contactInfo: [
+      { name: "555 227 7200", type: "phone", icon: <BsTelephoneFill /> },
+    ],
+    imageSrc: "/sumiya.png",
+    imageAlt: "Sumiya",
   },
 ];
 export default function Home() {
@@ -74,62 +87,136 @@ export default function Home() {
             </a>
           </div>
         </section>
-        <section className="location" id="location">
-          <h2>Lugar</h2>
-          <article>
-            <h3>Jardín Ixaya</h3>
-            <p>Tezontepec No. 200, Lomas de Jiutepec, 62566 Jiutepec, Mor.</p>
-            <button>Ver en mapa</button>
-            <div className="location-image"></div>
+        <section className="section" id="location">
+          <h2 className="section-title">Lugar</h2>
+          <article className="location-info">
+            <div className="location-info__main">
+              <h3>Jardín Ixaya</h3>
+              <p>
+                <HiLocationMarker /> Tezontepec No. 200, Lomas de Jiutepec,
+                62566 Jiutepec, Mor.
+              </p>
+              <a
+                href="https://goo.gl/maps/nUk9UQgqmMR3WDxg7"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="btn btn-cta">Ver en mapa</button>
+              </a>
+            </div>
+            <Image
+              className="location-image"
+              src="/jardin-ixaya.png"
+              alt="jardin Ixaya"
+              width={588}
+              height={392}
+            />
           </article>
-          <article>
-            <h3>Código de vestimenta: Formal</h3>
-            {scheduleData.map((card) => (
-              <LocationCard
-                key={card.event}
-                time={card.time}
-                event={card.event}
+          <article className="dress-code">
+            <h3>
+              Código de vestimenta: &nbsp;
+              <a
+                href="https://www.zankyou.com.mx/p/el-abc-del-dress-code-para-bodas-y-como-usar-cada-uno-los-codigos-de-vestir-al-descubierto"
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                Formal
+              </a>{" "}
+            </h3>
+          </article>
+          <article className="schedule">
+            <svg
+              className="shcedule-shape-desktop"
+              width="1000"
+              height="58"
+              viewBox="0 0 1000 58"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="28.6533" cy="28.6533" r="28.6533" fill="#D9D9D9" />
+              <circle cx="499.653" cy="28.6533" r="28.6533" fill="#D9D9D9" />
+              <circle cx="970.653" cy="28.6533" r="28.6533" fill="#D9D9D9" />
+              <rect
+                x="28.6533"
+                y="28.6533"
+                width="942.693"
+                height="5.73066"
+                fill="#D9D9D9"
+              />
+            </svg>
+            <svg
+              className="schedule-shape-mobile"
+              width="36"
+              height="350"
+              viewBox="0 0 36 612"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="17.6533"
+                cy="594.452"
+                r="17.548"
+                transform="rotate(-90 17.6533 594.452)"
+                fill="#D9D9D9"
+              />
+              <circle
+                cx="17.6533"
+                cy="306"
+                r="17.548"
+                transform="rotate(-90 17.6533 306)"
+                fill="#D9D9D9"
+              />
+              <circle
+                cx="17.6533"
+                cy="17.548"
+                r="17.548"
+                transform="rotate(-90 17.6533 17.548)"
+                fill="#D9D9D9"
+              />
+              <rect
+                x="17.6533"
+                y="594.452"
+                width="577.329"
+                height="3.5096"
+                transform="rotate(-90 17.6533 594.452)"
+                fill="#D9D9D9"
+              />
+            </svg>
+
+            <div className="schedule-cards">
+              {scheduleData.map((card) => (
+                <LocationCard
+                  key={card.event}
+                  time={card.time}
+                  event={card.event}
+                />
+              ))}
+            </div>
+          </article>
+        </section>
+        <section className="section" id="hosting">
+          <h2 className="section-title">Hospedaje</h2>
+          <div className="hosting-cards">
+            {hotelData.map((entry) => (
+              <HostingCard
+                key={entry.title}
+                title={entry.title}
+                description={entry.description}
+                contactInfo={entry.contactInfo}
+                imageSrc={entry.imageSrc}
+                imageAlt={entry.imageAlt}
               />
             ))}
-          </article>
+          </div>
         </section>
-        <section className="hosting">
-          <h2>Hospedaje</h2>
-          {hotelData.map((entry) => (
-            <HostingCard
-              key={entry.title}
-              title={entry.title}
-              description={entry.description}
-              contactInfo={entry.contactInfo}
-              imageSrc={entry.imageSrc}
-              imageAlt={entry.imageAlt}
-            />
-          ))}
-        </section>
-        <section className="gift-registry">
-          <h2>Regalo de Boda</h2>
-          <p>
+        <section className="section" id="registry">
+          <h2 className="section-title">Regalo de Boda</h2>
+          <p className="registry-message">
             El mejor regalo que nos pueden dar es acompañarnos en nuestra boda.
             Si quieren apoyarnos en nuestra siguiente etapa, les dejamos la
             información para una transferencia bancaria
           </p>
-          <article className="deposit-card">
-            <h3>Cuenta BBVA</h3>
-            <div className="deposit-card-subsection">
-              <h4 className="deposit-card-subheading">Titular</h4>
-              <p className="deposit-card-content">Carolina Díaz Pugh</p>
-            </div>
-            <div className="deposit-card-subsection">
-              <h4 className="deposit-card-subheading">Cuenta</h4>
-              <p className="deposit-card-content">0125 80015569 197821</p>
-              <i>Copy</i>
-            </div>
-            <div className="deposit-card-subsection">
-              <h4 className="deposit-card-subheading">Clabe</h4>
-              <p className="deposit-card-content">0125 80015569 197821</p>
-              <i>Copy</i>
-            </div>
-          </article>
+          <DepositCard />
         </section>
         <section className="rsvp" id="rsvp"></section>
       </main>

@@ -1,7 +1,8 @@
 
-interface Contact {
+export interface Contact {
     name: string;
-    icon: string;
+    type: 'phone' | 'whatsapp' | 'link',
+    icon: JSX.Element;
   }
   
 export type THostingCard = {

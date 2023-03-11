@@ -6,7 +6,7 @@ type Props = {};
 export default function Nav({}: Props) {
   return (
     <header>
-      <Image src="/cp1.png" alt="" priority width="50" height="50" />
+      <Image src="/cp-06.png" alt="" priority width="50" height="50" />
       <nav>
         <ul role="list" className="nav-items">
           <li>

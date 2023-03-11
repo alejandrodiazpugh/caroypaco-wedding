@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import { THostingCard } from "@/types/types";
 
@@ -11,15 +10,32 @@ export default function HostingCard({
 }: THostingCard) {
   return (
     <article className="hosting-card">
-      <div className="hosting-card-image">
-        <Image src={imageSrc} alt={imageAlt} />
-      </div>
+      <Image
+        src={imageSrc}
+        alt={imageAlt}
+        width={300}
+        height={200}
+        loading="lazy"
+      />
       <h3>{title}</h3>
       <p>{description}</p>
       <ul>
         {contactInfo.map((el) => (
           <li key={el.name}>
-            <i>{el.icon}</i> <span>{el.name}</span>
+            {el.icon}{" "}
+            {el.type === "link" ? (
+              <span>
+                <a
+                  href={`https://${el.name}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {el.name}
+                </a>
+              </span>
+            ) : (
+              <span>{el.name}</span>
+            )}
           </li>
         ))}
       </ul>
