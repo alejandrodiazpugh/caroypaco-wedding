@@ -125,22 +125,28 @@ header {
   justify-content: space-between;
   padding-inline: 2rem;
   align-items: center;
+
 }
 
-.nav-items {
+.nav-items__desktop {
   display: flex;
   gap: 16px;
   align-items: center;
   height: 100%;
   color: rgba(255, 255, 255, 0.7);
+
 }
 
-.nav-items > li > a {
+.mobile-nav {
+  display: none;
+}
+
+nav > ul > li > a {
   text-decoration: none;
   color: inherit;
   transition: color 200ms ease;
 }
-.nav-items > li > a:hover {
+nav > ul > li > a:hover {
   color: rgba(255, 255, 255, 1);
 }
 
@@ -472,8 +478,28 @@ html {
   .hero-image {
     background-position: 30% ;
   }
-  header {
+  .desktop-nav {
     display: none;
+  }
+  .mobile-nav {
+    display: block;
+    position: relative;
+  }
+
+  .nav-items__mobile {
+    position: absolute;
+    top: 50px;
+    width: 100vw;
+    left: 0px;
+    right: 0px;
+    background-color: rgb(var(--white));
+    background-color: rgba(var(--green-100), 0.7);
+    backdrop-filter: blur(4px);
+  }
+
+  .nav-items__mobile > li > a {
+    color: rgba(255, 255, 255, 0.7);
+
   }
 
   .site-title {
