@@ -506,21 +506,39 @@ html {
 	box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.3);
 }
 
+.rsvp-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding-block: 20px;
+  padding-inline: 16px;
+}
+
 .form-group {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	gap: 5px;
+  margin: 0;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-inline: auto;
+  align-items: space-between;
 }
 
 .field {
 	padding: 5px;
-	width: 300px;
+	width: 350px;
 	border: none;
 	border-radius: 4px;
 }
 
-.field:focus-within {
+.field:focus-within,
+.input-other > input:focus-within {
 	outline: 2px solid rgba(var(--green-100), 0.7);
 }
 
@@ -528,6 +546,97 @@ html {
 	min-height: 30px;
 	color: rgba(var(--green-200), 1);
 	font-size: 12px;
+}
+
+.guest-confirm {
+  width: 100%;
+}
+
+.radio-group {
+  display: flex;
+  justify-content: space-between;
+  margin-block: 5px;
+}
+
+.radio-button-options {
+  display: flex;
+  gap: 10px;
+}
+
+.radio-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+input[type='radio'] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: #fff;
+  /* Not removed via appearance */
+  margin: 0;
+  font: inherit;
+  color: rgb(var(--green));
+  width: 1.15em;
+  height: 1.15em;
+  border: 2px solid rgb(var(--green-200));
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  position: relative;
+  transition: 300ms ease all;
+}
+
+input[type="radio"]:checked {
+  background-color: rgb(var(--green-100));
+}
+
+input[type='checkbox'] {
+  appearance: none;
+  width: 1em;
+  background-color: white;
+
+  aspect-ratio: 1;
+  border: 1px solid rgb(var(--green-200));
+  border-radius: 4px;
+}
+
+input[type='checkbox']:checked {
+  background-color: rgb(var(--green-200));
+}
+
+.checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: stretch;
+  row-gap: 10px;
+  column-gap: 5px;
+}
+
+.checkbox-group > label {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.input-other {
+  grid-column: 1 /span 2;
+  width: 100%;
+}
+
+.input-other > input {
+  padding: 5px;
+	width: 300px;
+	border: none;
+	border-radius: 4px;
+}
+
+.required::after {
+  content: '*';
+  color: red;
 }
 
 @media only screen and (max-width: 1024px) {
