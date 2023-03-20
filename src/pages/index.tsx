@@ -65,6 +65,7 @@ const hotelData: THostingCard[] = [
 export default function Home() {
 	const [formShowing, setFormShowing] = useState(false);
 	const [guestData, setGuestData] = useState<TGuest>();
+	const [formSent, setFormSent] = useState(false);
 	return (
 		<>
 			<Head>
@@ -251,14 +252,20 @@ export default function Home() {
 				<section className="section" id="rsvp">
 					<h2 className="section-title">RSVP</h2>
 					<article className="rsvp-card">
-						{!formShowing || !guestData ? (
+						{formSent ? (
+							<section>
+								¡Se ha enviado tu respuesta, muchas gracias!
+							</section>
+						) : !formShowing || !guestData ? (
 							<RsvpCardInitial
 								setter={setFormShowing}
-								guestData={guestData}
 								guestSetter={setGuestData}
 							/>
 						) : (
-							<RsvpForm guest={guestData} />
+							<RsvpForm
+								guest={guestData}
+								setFormSent={setFormSent}
+							/>
 						)}
 					</article>
 				</section>

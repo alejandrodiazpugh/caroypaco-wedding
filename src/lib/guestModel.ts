@@ -5,14 +5,15 @@ dotenv.config();
 
 const guestSchema = new mongoose.Schema(
 	{
-		userId: { type: String, required: true },
-		firstName: { type: String, required: true },
-		lastName: { type: String, required: true },
-		fullname: { type: String, required: true },
-		phoneNumber: { type: String, required: true },
-		drinks: { type: [String], required: true },
-		otherDrink: { type: String, required: true },
-		isAttending: { type: String, required: true },
+		userId: { type: String, required: false },
+		firstName: { type: String, required: false },
+		lastName: { type: String, required: false },
+		fullname: { type: String, required: false },
+		phoneNumber: { type: String, required: false },
+		drinks: { type: String, required: false },
+		otherDrink: { type: String, required: false },
+		isAttending: { type: String, required: false },
+		confirmed: { type: Number, required: false },
 		guests: { type: Number, required: true },
 	},
 	{ collection: 'guests' }
@@ -21,5 +22,4 @@ const guestSchema = new mongoose.Schema(
 export const guests =
 	mongoose.models.guests || mongoose.model('guests', guestSchema);
 
-export const MONGO_LOGIN =
-	'mongodb+srv://alejandroDiazPugh:jbEHo1QB6p3FXCOO@wedding-info.yvv2oms.mongodb.net/?retryWrites=true&w=majority';
+export const MONGO_LOGIN = process.env.DB_HOST;

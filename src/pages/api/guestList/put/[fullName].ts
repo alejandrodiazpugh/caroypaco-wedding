@@ -10,7 +10,7 @@ export default async function handler(
 	try {
 		const { method } = req;
 		const { fullName } = req.query;
-		const { guestData } = req.body;
+		const guestData = req.body;
 		if (method !== 'PUT') {
 			throw new Error('Incorrect method calling');
 		}
@@ -27,7 +27,7 @@ export default async function handler(
 				body: 'El nombre provisto no está en la lista',
 			});
 		}
-		return res.status(200).send({ code: 200, body: guestData });
+		return res.status(200).send(updateGuest);
 	} catch (error) {
 		console.error(error);
 	}

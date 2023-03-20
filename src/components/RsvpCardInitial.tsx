@@ -6,14 +6,9 @@ import * as Yup from 'yup';
 type Props = {
 	setter: React.Dispatch<React.SetStateAction<boolean>>;
 	guestSetter: React.Dispatch<React.SetStateAction<any>>;
-	guestData: any;
 };
 
-export default function RsvpCardInitial({
-	setter,
-	guestSetter,
-	guestData,
-}: Props) {
+export default function RsvpCardInitial({ setter, guestSetter }: Props) {
 	const [loading, setLoading] = useState(false);
 	const [error, setShowError] = useState(false);
 
@@ -68,13 +63,13 @@ export default function RsvpCardInitial({
 									resolve(response);
 									response.json().then((res) => {
 										guestSetter(res.body);
-										console.log(res.body);
 									});
 									console.log('Response Succeeded');
 									setter(true);
 								}
 							})
 							.catch((error) => {
+								reject(error);
 								setShowError(true);
 								console.error(error);
 							})

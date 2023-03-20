@@ -2,19 +2,22 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { TGuest } from '@/types/types';
 
-type Props = { guest: TGuest };
+type Props = {
+	guest: TGuest;
+	setFormSent: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-export default function RsvpForm({ guest }: Props) {
+export default function RsvpForm({ guest, setFormSent }: Props) {
 	const guestList = guest.guests - 1;
 	return (
 		<Formik
 			initialValues={{
-				phoneNumber: guest.phoneNumber,
-				drinks: guest.drinks,
-				otherDrink: guest.otherDrink,
+				phoneNumber: '',
+				drinks: [],
+				otherDrink: '',
 				guests: guest.guests,
-				isAttending: guest.isAttending,
-				peopleAttending: 0,
+				isAttending: '',
+				confirmed: 0,
 			}}
 			validationSchema={Yup.object({
 				phoneNumber: Yup.string()
@@ -26,26 +29,50 @@ export default function RsvpForm({ guest }: Props) {
 				),
 			})}
 			onSubmit={(values, { setSubmitting }) => {
-				fetch(`/api/guestList/put/${guest.fullname}`, {
-					method: 'PUT',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(values),
-				}).then((res) => {
-					console.log(values);
-					console.log('Response received');
-					if (res.status === 200) {
-						console.log('Response Succeeded');
+				for (const [key, value] of Object.entries(values)) {
+					if (value === 'yes') {
+						values.confirmed++;
+						console.log(values.confirmed);
 					}
+				}
+				const sendData = {
+					phoneNumber: values.phoneNumber,
+					drinks: values.drinks.join(', '),
+					otherDrink: values.otherDrink,
+					confirmed: values.confirmed,
+					isAttending: values.isAttending,
+				};
+				return new Promise((resolve, reject) => {
+					fetch(`/api/guestList/put/${guest.fullname}`, {
+						method: 'PUT',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+
+						body: JSON.stringify(sendData),
+					})
+						.then((res) => {
+							resolve(res);
+							console.log('Response received');
+							if (res.status === 200) {
+								console.log('Response Succeeded');
+							}
+						})
+						.catch((error) => {
+							reject('error');
+							console.error(error);
+						})
+						.finally(() => {
+							setSubmitting(false);
+							setFormSent(true);
+						});
 				});
-				setSubmitting(false);
 			}}
 		>
 			{(formik) => (
 				<Form
-					action="/api/contactFormApi"
-					method="GET"
+					action="/api/guestList"
+					method="PUT"
 					onSubmit={formik.handleSubmit}
 					className="rsvp-form"
 				>
@@ -136,6 +163,7 @@ export default function RsvpForm({ guest }: Props) {
 								</div>
 							))}
 						</div>
+						<Field type="text" name="confirmed" />
 					</section>
 					<h4>¿Qué te gusta tomar?</h4>
 					<div className="checkbox-group">

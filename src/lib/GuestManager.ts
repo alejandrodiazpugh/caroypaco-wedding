@@ -58,13 +58,16 @@ export default class GuestListManager {
 
 	async update(query: string, data: Partial<TGuest>) {
 		try {
+			const filter = { fullname: query };
+			const update = { ...data };
 			this.connect();
 			const updatedData = await this.model.findOneAndUpdate(
-				{ fullname: query },
-				{ $set: { ...data } },
-				{ upsert: true }
+				filter,
+				update,
+				{ upsert: true, new: true }
 			);
-			return updatedData;
+			console.log(await updatedData);
+			return await updatedData;
 		} catch (err) {
 			console.error(`Error al actualizar la base de datos: ${err}`);
 		}

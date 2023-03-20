@@ -24,4 +24,5 @@ export type TGuest = {
 	otherDrink: string;
 	isAttending: 'yes' | 'no' | '';
 	guests: number;
+	confirmed: number;
 };
