@@ -49,7 +49,7 @@ export default function Nav({}: Props) {
         )}
       </nav>
       <nav className="desktop-nav">
-        <ul role="list" className="nav-items__desktop">
+        <ul role="list" className={`nav-items__desktop`}>
           <li>
             <a href="#location">Lugar y Fecha</a>
           </li>
