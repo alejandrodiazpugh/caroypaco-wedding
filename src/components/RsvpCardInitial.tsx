@@ -1,86 +1,141 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { ClipLoader } from 'react-spinners';
 import * as Yup from 'yup';
 
 type Props = {
 	setter: React.Dispatch<React.SetStateAction<boolean>>;
+	guestSetter: React.Dispatch<React.SetStateAction<any>>;
+	guestData: any;
 };
 
-export default function RsvpCardInitial({ setter }: Props) {
+export default function RsvpCardInitial({
+	setter,
+	guestSetter,
+	guestData,
+}: Props) {
 	const [loading, setLoading] = useState(false);
-	const handleClick = (e: React.MouseEvent) => {
-		setLoading(true);
-		setTimeout(() => {
-			setLoading(false);
-			setter(true);
-		}, 2000);
-	};
+	const [error, setShowError] = useState(false);
+
 	return (
-		<Formik
-			initialValues={{
-				fullName: '',
-			}}
-			validationSchema={Yup.object({
-				fullName: Yup.string()
-					.max(255, 'El campo debe tener 255 carácteres o menos')
-					.matches(/^[a-zA-Z\s]+$/, 'No incluir acentos en el nombre')
-					.required('Ingresa tu nombre para buscar tus datos'),
-				phoneNumber: Yup.string()
-					.max(
-						10,
-						'El número de teléfono no debe exceder 10 dígitos.'
-					)
-					.matches(/@"\d{10}$/, 'Solo incluye números'),
-			})}
-			onSubmit={(values, { setSubmitting }) => {
-				fetch(`/api/guest/${values.fullName}`, {
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-				}).then((res) => {
-					console.log('Response received');
-					if (res.status === 200) {
-						setter(true);
-						console.log('Response Succeeded');
-					}
-				});
-				setSubmitting(false);
-			}}
-		>
-			{(formik) => (
-				<Form onSubmit={formik.handleSubmit}>
-					<div className="form-group">
-						<label htmlFor="fullName">Nombre Completo:</label>
-						<Field
-							aria-label="Nombre completo"
-							className="field"
-							type="text"
-							id="fullName"
-							autoComplete="off"
-							{...formik.getFieldProps('fullName')}
-						/>
-						<div className="field-message">
-							<ErrorMessage name="fullName" />
+		<>
+			<Formik
+				initialValues={{
+					firstName: '',
+					lastName: '',
+				}}
+				validationSchema={Yup.object({
+					firstName: Yup.string()
+						.max(255, 'El campo debe tener 255 carácteres o menos')
+						.matches(
+							/^[a-zA-Z\s]+$/,
+							'No incluir acentos en el nombre'
+						)
+						.required('Ingresa tu nombre para buscar tus datos'),
+					lastName: Yup.string()
+						.max(255, 'El campo debe tener 255 carácteres o menos')
+						.matches(
+							/^[a-zA-Z\s]+$/,
+							'No incluir acentos en el apellido'
+						)
+						.required('Ingresa tu apellido para buscar tus datos'),
+				})}
+				onSubmit={(values, { setSubmitting }) => {
+					const firstNameJoined = values.firstName
+							.split(' ')
+							.join('')
+							.toLowerCase(),
+						lastNamesJoined = values.lastName
+							.split(' ')
+							.join('')
+							.toLowerCase();
+					const valueToSend = `${firstNameJoined}${lastNamesJoined}`;
+
+					return new Promise((resolve, reject) => {
+						fetch(`/api/guestList/get/${valueToSend}`, {
+							method: 'GET',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+						})
+							.then((response) => {
+								setLoading(true);
+								console.log('response received');
+								if (response.body === null) {
+									throw new Error('null query');
+								}
+								if (response.status === 200) {
+									resolve(response);
+									response.json().then((res) => {
+										guestSetter(res.body);
+										console.log(res.body);
+									});
+									console.log('Response Succeeded');
+									setter(true);
+								}
+							})
+							.catch((error) => {
+								setShowError(true);
+								console.error(error);
+							})
+							.finally(() => {
+								setLoading(false);
+								setSubmitting(false);
+							});
+					});
+				}}
+			>
+				{(formik) => (
+					<Form onSubmit={formik.handleSubmit}>
+						<div className="form-group">
+							<label htmlFor="firstName">Nombre:</label>
+							<Field
+								aria-label="Nombre"
+								className="field"
+								type="text"
+								id="firstName"
+								autoComplete="off"
+								{...formik.getFieldProps('firstName')}
+							/>
+							<div className="field-message">
+								<ErrorMessage name="firstName" />
+							</div>
 						</div>
-					</div>
-					<button
-						className={`btn ${
-							formik.isValid ? 'btn-form' : 'btn-form-disabled'
-						}`}
-						onClick={(e) => handleClick(e)}
-						type="submit"
-						disabled={!(formik.isValid && formik.dirty)}
-					>
-						{!loading ? (
-							'Buscar'
-						) : (
-							<ClipLoader color="white" size="20px" />
-						)}
-					</button>
-				</Form>
-			)}
-		</Formik>
+						<div className="form-group">
+							<label htmlFor="lastName">Apellido:</label>
+							<Field
+								aria-label="apellido"
+								className="field"
+								type="text"
+								id="lastName"
+								autoComplete="off"
+								{...formik.getFieldProps('lastName')}
+							/>
+							<div className="field-message">
+								<ErrorMessage name="lastName" />
+							</div>
+						</div>
+						<button
+							className={`btn ${
+								formik.isValid
+									? 'btn-form'
+									: 'btn-form-disabled'
+							}`}
+							type="submit"
+							disabled={!(formik.isValid && formik.dirty)}
+						>
+							{!loading ? (
+								'Buscar'
+							) : (
+								<ClipLoader color="white" size="20px" />
+							)}
+						</button>
+					</Form>
+				)}
+			</Formik>
+			{error ? (
+				<div className="error-message">Intente nuevamente </div>
+			) : null}
+		</>
 	);
 }
