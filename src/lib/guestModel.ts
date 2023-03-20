@@ -22,4 +22,4 @@ const guestSchema = new mongoose.Schema(
 export const guests =
 	mongoose.models.guests || mongoose.model('guests', guestSchema);
 
-export const MONGO_LOGIN = process.env.MONGODB_URI;
+export const MONGO_LOGIN = process.env.NEXT_PUBLIC_MONGODB_URI;
