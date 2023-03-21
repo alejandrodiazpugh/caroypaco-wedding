@@ -4,10 +4,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-const guestsAPI = new MongoDAO(
-	(process.env.NEXT_PUBLIC_MONGODB_URI as string) ||
-		(process.env.MONGODB_URI as string)
-);
+const guestsAPI = new MongoDAO(process.env.MONGODB_URI as string);
 
 export default async function handler(
 	req: NextApiRequest,
