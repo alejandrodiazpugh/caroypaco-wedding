@@ -3,7 +3,6 @@ import MongoDAO from '@/lib/mongodb';
 import { TGuest } from '@/types/types';
 
 type TId = { userId: string };
-type TGuestRes = TGuest & TId;
 
 const guestsAPI = new MongoDAO(process.env.MONGODB_URI as string);
 

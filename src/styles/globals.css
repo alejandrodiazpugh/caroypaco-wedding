@@ -118,7 +118,7 @@ header {
 	width: 100vw;
 	height: 80px;
 	position: relative;
-	background-color: rgba(var(--green-100), 0.7);
+	background-color: rgba(var(--green-100));
 	backdrop-filter: blur(4px);
 	z-index: 9999;
 	display: flex;
@@ -127,7 +127,11 @@ header {
 	align-items: center;
 }
 
-.nav-items {
+.mobile-nav {
+	display: none;
+}
+
+.nav-items__desktop {
 	display: flex;
 	gap: 16px;
 	align-items: center;
@@ -135,6 +139,9 @@ header {
 	color: rgba(255, 255, 255, 0.7);
 }
 
+.nav-items__mobile {
+	display: none;
+}
 .nav-items > li > a {
 	text-decoration: none;
 	color: inherit;
@@ -651,14 +658,33 @@ input[type='checkbox']:checked {
 }
 
 @media only screen and (max-width: 1024px) {
+	.mobile-nav {
+		display: flex;
+	}
+	.desktop-nav {
+		display: none;
+	}
+
+	.nav-items__mobile {
+		color: rgba(255, 255, 255, 0.7);
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		padding-inline: 30px;
+		gap: 16px;
+		padding-block-end: 10px;
+		position: absolute;
+		width: 100vw;
+		margin-inline: 0;
+		top: 60px;
+		right: 0px;
+		background-color: rgba(var(--green-100));
+	}
 	.hero {
 		align-items: center;
 	}
 	.hero-image {
 		background-position: 30%;
-	}
-	header {
-		display: none;
 	}
 
 	.site-title {
@@ -706,7 +732,7 @@ input[type='checkbox']:checked {
 		z-index: -1;
 	}
 
-	.shcedule-shape-desktop {
+	.schedule-shape-desktop {
 		display: none;
 	}
 	.schedule-cards {
@@ -774,5 +800,58 @@ input[type='checkbox']:checked {
 	.copy-alert {
 		bottom: -60px;
 		text-align: center;
+	}
+
+	.rsvp-card {
+		max-width: 90%;
+	}
+	.rsvp-card .form-group {
+		max-width: 90%;
+		margin-inline: auto;
+	}
+
+	.rsvp-card input {
+		max-width: 90%;
+	}
+
+	.radio-group,
+	.guest-confirm {
+		max-width: 90%;
+	}
+
+	.rsvp-form h3 {
+		font-size: 14px;
+		font-weight: 300;
+	}
+	.rsvp-form {
+		max-width: 100%;
+	}
+	.rsvp-form h4,
+	.rsvp-form p {
+		font-size: 12px;
+		font-weight: 300;
+	}
+	.rsvp-form .input-group {
+		justify-content: center;
+	}
+
+	.rsvp-form .input-group p {
+		margin-block: 0;
+		padding-right: 5px;
+	}
+
+	.rsvp-form .form-group {
+		align-items: center;
+	}
+	.checkbox-group {
+		max-width: 90%;
+		row-gap: 1rem;
+	}
+	.checkbox-group > label {
+		align-self: center;
+	}
+	.input-other {
+		flex-direction: column;
+		align-items: flex-start;
 	}
 }

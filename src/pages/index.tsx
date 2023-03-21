@@ -92,7 +92,6 @@ export default function Home() {
 							width="450"
 							height="225"
 							loading="eager"
-							priority
 						/>
 						<h2 className="subtitle">Save the Date</h2>
 						<h3 className="date">09.09.23</h3>
