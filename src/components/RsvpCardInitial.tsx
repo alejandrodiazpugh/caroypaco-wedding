@@ -6,11 +6,17 @@ import * as Yup from 'yup';
 type Props = {
 	setter: React.Dispatch<React.SetStateAction<boolean>>;
 	guestSetter: React.Dispatch<React.SetStateAction<any>>;
+	errorSetter: React.Dispatch<React.SetStateAction<boolean>>;
+	errorState: boolean;
 };
 
-export default function RsvpCardInitial({ setter, guestSetter }: Props) {
+export default function RsvpCardInitial({
+	setter,
+	guestSetter,
+	errorSetter,
+	errorState,
+}: Props) {
 	const [loading, setLoading] = useState(false);
-	const [error, setShowError] = useState(false);
 
 	return (
 		<>
@@ -56,21 +62,31 @@ export default function RsvpCardInitial({ setter, guestSetter }: Props) {
 							.then((response) => {
 								setLoading(true);
 								console.log('response received');
+								console.log(errorState);
 								if (response.body === null) {
 									throw new Error('null query');
 								}
 								if (response.status === 200) {
 									resolve(response);
-									response.json().then((res) => {
-										guestSetter(res.body);
-									});
+									response
+										.json()
+										.then((res) => {
+											guestSetter(res.body);
+										})
+										.catch((error) => {
+											errorSetter(true);
+											console.error(error);
+											console.log(errorState);
+										});
 									console.log('Response Succeeded');
 									setter(true);
 								}
 							})
 							.catch((error) => {
 								reject(error);
-								setShowError(true);
+								errorSetter(true);
+								console.log(errorState);
+
 								console.error(error);
 							})
 							.finally(() => {
@@ -128,9 +144,6 @@ export default function RsvpCardInitial({ setter, guestSetter }: Props) {
 					</Form>
 				)}
 			</Formik>
-			{error ? (
-				<div className="error-message">Intente nuevamente </div>
-			) : null}
 		</>
 	);
 }

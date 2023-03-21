@@ -163,7 +163,6 @@ export default function RsvpForm({ guest, setFormSent }: Props) {
 								</div>
 							))}
 						</div>
-						<Field type="text" name="confirmed" />
 					</section>
 					<h4>¿Qué te gusta tomar?</h4>
 					<div className="checkbox-group">

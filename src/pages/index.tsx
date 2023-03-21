@@ -66,6 +66,8 @@ export default function Home() {
 	const [formShowing, setFormShowing] = useState(false);
 	const [guestData, setGuestData] = useState<TGuest>();
 	const [formSent, setFormSent] = useState(false);
+	const [error, setShowError] = useState(false);
+
 	return (
 		<>
 			<Head>
@@ -260,6 +262,8 @@ export default function Home() {
 							<RsvpCardInitial
 								setter={setFormShowing}
 								guestSetter={setGuestData}
+								errorState={error}
+								errorSetter={setShowError}
 							/>
 						) : (
 							<RsvpForm
@@ -269,6 +273,10 @@ export default function Home() {
 						)}
 					</article>
 				</section>
+				{error ? (
+					<article className="error-alert">error</article>
+				) : null}
+				<article></article>
 			</main>
 		</>
 	);

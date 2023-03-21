@@ -1,7 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import MongoDAO from '@/lib/mongodb';
+import * as dotenv from 'dotenv';
 
-const guestsAPI = new MongoDAO();
+dotenv.config();
+
+const guestsAPI = new MongoDAO(process.env.NEXT_PUBLIC_MONGODB_URI as string);
 
 export default async function handler(
 	req: NextApiRequest,

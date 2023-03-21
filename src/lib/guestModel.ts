@@ -1,7 +1,4 @@
 import mongoose from 'mongoose';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
 
 const guestSchema = new mongoose.Schema(
 	{
@@ -21,5 +18,3 @@ const guestSchema = new mongoose.Schema(
 
 export const guests =
 	mongoose.models.guests || mongoose.model('guests', guestSchema);
-
-export const MONGO_LOGIN = process.env.NEXT_PUBLIC_MONGODB_URI as string;

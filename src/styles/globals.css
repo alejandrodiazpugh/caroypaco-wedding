@@ -639,11 +639,15 @@ input[type='checkbox']:checked {
 	color: red;
 }
 
-.error-message {
+.error-alert {
 	width: 200px;
 	height: 100px;
 	background-color: red;
-	position: absolute;
+	font-weight: 700;
+	color: black;
+	position: sticky;
+	top: 50px;
+	left: 50px;
 }
 
 @media only screen and (max-width: 1024px) {

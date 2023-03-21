@@ -5,7 +5,7 @@ import { TGuest } from '@/types/types';
 type TId = { userId: string };
 type TGuestRes = TGuest & TId;
 
-const guestsAPI = new MongoDAO();
+const guestsAPI = new MongoDAO(process.env.NEXT_PUBLIC_MONGODB_URI as string);
 
 export default async function handler(
 	req: NextApiRequest,
