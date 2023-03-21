@@ -139,8 +139,10 @@ export default function Home() {
 								Formal
 							</a>{' '}
 						</h3>
+						<h4>Solo adultos</h4>
 					</article>
 					<article className="schedule">
+						<h2>HORARIO</h2>
 						<svg
 							className="schedule-shape-desktop"
 							width="1000"

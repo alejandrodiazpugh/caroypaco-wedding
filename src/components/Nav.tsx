@@ -41,7 +41,7 @@ export default function Nav({}: Props) {
 	}, [windowDimension]);
 	return (
 		<header>
-			<Image src="/cp-06.png" alt="" priority width="50" height="50" />
+			<Image src="/cp-06.png" alt="" priority width="60" height="60" />
 			<nav className="mobile-nav">
 				{navOpen ? (
 					<IoClose fill={'white'} onClick={() => handleClick()} />
