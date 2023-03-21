@@ -155,7 +155,7 @@ header {
 
 .hero {
 	width: 100vw;
-	min-height: 100dvh;
+	min-height: 100svh;
 	position: relative;
 	display: flex;
 	flex-direction: column;
