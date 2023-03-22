@@ -31,7 +31,7 @@ const hotelData: THostingCard[] = [
 		description:
 			'Marcar directo, mencionando que se hospedan para la boda de Carolina y Paco 09 de septiembre, o por whatsapp con el códico G1NL0G',
 		contactInfo: [
-			{ name: '443 310 8137', type: 'phone', icon: <BsTelephoneFill /> },
+			{ name: '777 516 1010', type: 'phone', icon: <BsTelephoneFill /> },
 			{ name: '443 137 8738', type: 'whatsapp', icon: <FaWhatsapp /> },
 		],
 		imageSrc: '/hotel-huayacan.png',
@@ -90,7 +90,7 @@ export default function Home() {
 							src="/cp-04.png"
 							alt=""
 							width="450"
-							height="225"
+							height="150"
 							loading="eager"
 						/>
 						<h2 className="subtitle">Save the Date</h2>
@@ -131,13 +131,7 @@ export default function Home() {
 					<article className="dress-code">
 						<h3>
 							Código de vestimenta: &nbsp;
-							<a
-								href="https://www.zankyou.com.mx/p/el-abc-del-dress-code-para-bodas-y-como-usar-cada-uno-los-codigos-de-vestir-al-descubierto"
-								rel="noreferrer noopener"
-								target="_blank"
-							>
-								Formal
-							</a>{' '}
+							<span>Formal</span>{' '}
 						</h3>
 						<h4>Solo adultos</h4>
 					</article>
@@ -263,7 +257,6 @@ export default function Home() {
 							<RsvpCardInitial
 								setter={setFormShowing}
 								guestSetter={setGuestData}
-								errorState={error}
 								errorSetter={setShowError}
 							/>
 						) : (
@@ -273,11 +266,13 @@ export default function Home() {
 							/>
 						)}
 					</article>
+					{error ? (
+						<article className="error-alert">
+							Error al buscar el nombre, intenta solo un nombre y
+							un apellido.
+						</article>
+					) : null}
 				</section>
-				{error ? (
-					<article className="error-alert">error</article>
-				) : null}
-				<article></article>
 			</main>
 		</>
 	);

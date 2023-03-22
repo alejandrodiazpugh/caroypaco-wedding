@@ -23,10 +23,10 @@ export default async function handler(
 			throw new Error('Invalid request');
 		}
 		const guestInfo = await guestsAPI.getByFullName(fullName);
-		if (guestInfo === null) {
+		if (!guestInfo) {
 			return res.status(400).send({
 				code: 400,
-				body: 'El nombre provisto no está en la lista',
+				msg: 'El nombre provisto no está en la lista, intenta solo con un nombre y apellido',
 			});
 		}
 		return res.status(200).send({ code: 200, body: guestInfo });

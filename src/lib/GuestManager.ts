@@ -19,7 +19,6 @@ export default class GuestListManager {
 			this.connection = await mongoose.connect(this.url, {
 				dbName: 'caro-paco',
 			});
-			console.log('Conexion establecida a MongoDB');
 		} catch (err) {
 			throw new Error(`Error conectando a MongoDB: ${err}`);
 		}
@@ -66,7 +65,6 @@ export default class GuestListManager {
 				update,
 				{ upsert: true, new: true }
 			);
-			console.log(await updatedData);
 			return await updatedData;
 		} catch (err) {
 			console.error(`Error al actualizar la base de datos: ${err}`);

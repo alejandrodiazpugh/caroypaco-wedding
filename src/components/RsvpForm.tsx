@@ -32,7 +32,6 @@ export default function RsvpForm({ guest, setFormSent }: Props) {
 				for (const [key, value] of Object.entries(values)) {
 					if (value === 'yes') {
 						values.confirmed++;
-						console.log(values.confirmed);
 					}
 				}
 				const sendData = {
@@ -53,10 +52,6 @@ export default function RsvpForm({ guest, setFormSent }: Props) {
 					})
 						.then((res) => {
 							resolve(res);
-							console.log('Response received');
-							if (res.status === 200) {
-								console.log('Response Succeeded');
-							}
 						})
 						.catch((error) => {
 							reject('error');

@@ -7,14 +7,12 @@ type Props = {
 	setter: React.Dispatch<React.SetStateAction<boolean>>;
 	guestSetter: React.Dispatch<React.SetStateAction<any>>;
 	errorSetter: React.Dispatch<React.SetStateAction<boolean>>;
-	errorState: boolean;
 };
 
 export default function RsvpCardInitial({
 	setter,
 	guestSetter,
 	errorSetter,
-	errorState,
 }: Props) {
 	const [loading, setLoading] = useState(false);
 
@@ -61,10 +59,11 @@ export default function RsvpCardInitial({
 						})
 							.then((response) => {
 								setLoading(true);
-								console.log('response received');
-								console.log(errorState);
-								if (response.body === null) {
-									throw new Error('null query');
+								if (!response) {
+									errorSetter(true);
+								}
+								if (response.status === 400) {
+									errorSetter(true);
 								}
 								if (response.status === 200) {
 									resolve(response);
@@ -76,22 +75,21 @@ export default function RsvpCardInitial({
 										.catch((error) => {
 											errorSetter(true);
 											console.error(error);
-											console.log(errorState);
 										});
-									console.log('Response Succeeded');
 									setter(true);
 								}
 							})
 							.catch((error) => {
 								reject(error);
 								errorSetter(true);
-								console.log(errorState);
-
 								console.error(error);
 							})
 							.finally(() => {
 								setLoading(false);
 								setSubmitting(false);
+								setTimeout(() => {
+									errorSetter(false);
+								}, 3000);
 							});
 					});
 				}}
