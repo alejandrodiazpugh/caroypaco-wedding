@@ -274,6 +274,16 @@ export default function Home() {
 					) : null}
 				</section>
 			</main>
+			<footer className="footer">
+				By{' '}
+				<a
+					rel="noreferrer noopener"
+					href="https://diazpugh.com"
+					target="_blank"
+				>
+					diaz pugh
+				</a>
+			</footer>
 		</>
 	);
 }

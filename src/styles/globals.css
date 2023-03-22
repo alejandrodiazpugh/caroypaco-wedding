@@ -871,3 +871,10 @@ input[type='checkbox']:checked {
 		align-items: flex-start;
 	}
 }
+
+footer {
+	width: 100vw;
+	margin-inline: auto;
+	text-align: center;
+	font-size: 12px;
+}
