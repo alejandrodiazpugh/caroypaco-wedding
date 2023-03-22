@@ -40,6 +40,7 @@ export default function RsvpCardInitial({
 						.required('Ingresa tu apellido para buscar tus datos'),
 				})}
 				onSubmit={(values, { setSubmitting }) => {
+					setLoading(true);
 					const firstNameJoined = values.firstName
 							.split(' ')
 							.join('')
@@ -58,7 +59,6 @@ export default function RsvpCardInitial({
 							},
 						})
 							.then((response) => {
-								setLoading(true);
 								if (!response) {
 									errorSetter(true);
 								}
