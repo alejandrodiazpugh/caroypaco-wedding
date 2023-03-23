@@ -239,10 +239,9 @@ export default function Home() {
 				<section className="section" id="registry">
 					<h2 className="section-title">Regalo de Boda</h2>
 					<p className="registry-message">
-						El mejor regalo que nos pueden dar es acompañarnos en
-						nuestra boda. Si quieren apoyarnos en nuestra siguiente
-						etapa, les dejamos la información para una transferencia
-						bancaria
+						Su asistencia a nuestra boda será regalo suficiente.
+						Pero si desean ayudarnos para nuestra nueva etapa, les
+						dejamos los datos de nuestra cuenta bancaria.
 					</p>
 					<DepositCard />
 				</section>
