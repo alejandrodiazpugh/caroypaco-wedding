@@ -276,14 +276,41 @@ header {
 	color: rgb(var(--green-200));
 }
 
-a {
+a,
+.dialog-btn {
 	text-decoration: none;
 	color: rgb(var(--green-100));
 	transition: 400ms text-decoration ease-in;
+	cursor: pointer;
+	user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
+.dialog-title {
+	padding: 1rem;
+	border-radius: 5px;
+	text-align: center;
+	font-size: 26px;
+}
+
+.dialog-images {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 2rem;
+}
+
+.dialog-images > * {
+	object-fit: cover;
 }
 
 a:hover,
-a:focus {
+a:focus,
+.dialog-btn:hover,
+.dialog-btn:focus {
 	text-decoration: underline;
 }
 
@@ -676,6 +703,26 @@ input[type='checkbox']:checked {
 	bottom: -150px;
 	left: 50%;
 	transform: translateX(-50%);
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
 }
 
 @media only screen and (max-width: 1024px) {

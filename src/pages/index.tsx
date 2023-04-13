@@ -13,6 +13,7 @@ import RsvpCardInitial from '@/components/RsvpCardInitial';
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import RsvpForm from '@/components/RsvpForm';
+import Dialog from '@/components/Dialog';
 
 const DATE_OF_EVENT = new Date('Sep 9, 2023, 15:00');
 
@@ -67,7 +68,15 @@ export default function Home() {
 	const [guestData, setGuestData] = useState<TGuest>();
 	const [formSent, setFormSent] = useState(false);
 	const [error, setShowError] = useState(false);
+	const [openDialog, setOpenDialog] = useState(false);
 
+	function handleOpenDialog() {
+		setOpenDialog(true);
+		console.log('hola');
+	}
+	function handleClose() {
+		setOpenDialog(false);
+	}
 	return (
 		<>
 			<Head>
@@ -131,8 +140,14 @@ export default function Home() {
 					<article className="dress-code">
 						<h3>
 							Código de vestimenta: &nbsp;
-							<span>Formal</span>{' '}
+							<span
+								className="dialog-btn"
+								onClick={handleOpenDialog}
+							>
+								Formal
+							</span>{' '}
 						</h3>
+						<Dialog open={openDialog} onClose={handleClose} />
 						<h4>Solo adultos</h4>
 					</article>
 					<article className="schedule">
