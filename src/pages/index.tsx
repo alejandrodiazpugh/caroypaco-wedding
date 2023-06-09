@@ -55,9 +55,10 @@ const hotelData: THostingCard[] = [
 	{
 		title: 'Hotel Sumiya',
 		description:
-			'Marcar directo, mencionando que se hospedan para la boda de Carolina y Paco 09 de septiembre',
+			'Preguntar por Cristina Popoca o Gabriela Ruiz, reservar con el convenio para la boda de Caro y Paco.',
 		contactInfo: [
-			{ name: '555 227 7200', type: 'phone', icon: <BsTelephoneFill /> },
+			{ name: '777 329 9860', type: 'phone', icon: <BsTelephoneFill /> },
+			{ name: '777 328 9888', type: 'phone', icon: <BsTelephoneFill /> },
 		],
 		imageSrc: '/sumiya.png',
 		imageAlt: 'Sumiya',
